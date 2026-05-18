@@ -140,7 +140,7 @@
         .logo-circle {
             border: 1px solid rgba(212, 175, 55, 0.6);
             border-radius: 50%;
-            padding: 12px;
+            padding: 8px;
             background: #0c1324;
             display: flex;
             align-items: center;
@@ -148,12 +148,17 @@
             overflow: hidden;
             transition: border-color 0.3s ease;
         }
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
         .logo-circle:hover {
             border-color: #f2ca50;
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
+
         .fade-slide {
             position: absolute;
             inset: 0;
@@ -172,7 +177,7 @@
             background-color: rgba(12, 19, 36, 0.98);
             backdrop-blur: 16px;
         }
-        
+
         .social-icon {
             @apply w-12 h-12 rounded-full border border-outline-variant/30 flex items-center justify-center transition-all duration-300;
         }
@@ -184,6 +189,40 @@
         .social-instagram:hover { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); box-shadow: 0 0 15px rgba(220, 39, 67, 0.5); }
         .social-tiktok:hover { background-color: #000000; border-color: #ff0050; box-shadow: 0 0 15px rgba(255, 0, 80, 0.5); }
         .social-email:hover { background-color: #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+
+        /* Scroll Reveal Animation Styles */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-on-scroll.delay-100 { transition-delay: 0.1s; }
+        .reveal-on-scroll.delay-200 { transition-delay: 0.2s; }
+        .reveal-on-scroll.delay-300 { transition-delay: 0.3s; }
+        .reveal-on-scroll.delay-400 { transition-delay: 0.4s; }
+        .reveal-on-scroll.delay-500 { transition-delay: 0.5s; }
+
+        .category-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        .category-card:hover::before {
+            left: 100%;
+        }
     </style>
 <style>
     .testimonial-slide.active { opacity: 1; z-index: 10; }
@@ -216,7 +255,7 @@
 <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-unit-3 max-w-container-max mx-auto h-24">
 <div class="flex items-center gap-6">
 <div class="logo-circle h-16 w-16">
-<img alt="Astral Edge" class="h-full w-full object-contain object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ujcOZ21HODyokLNBkDj2dfRg8sFVAueoFBAnBk51W3vxzENWUr4KKyuuRMg8kAACBmN9PjRMCRBsnRzlAZRompsrR0FnqVNQqBwS0y8ygncH2HGYB956RjPuoZNnhue5XuDi28tgMmCbPHqJdgPSlKW88n09DIAtWD3kCvhLMyqAW_LPE9RV9toIfJ56P202YIzG3DAK7xYb3wtAtxeOA3rn7hlF47iTR3bJzBnDeIlgjVtzLTdGFdgyb3uJBUmcMWLiswsCi6Q">
+<img alt="Astral Edge" class="h-full w-full" src="astraledge/Asset 1.png">
 </div>
 <span class="font-display-lg text-headline-md text-primary tracking-tighter hidden md:block">Astraledge</span>
 </div>
@@ -273,7 +312,7 @@
 <section class="py-40 bg-background overflow-hidden" id="welcome">
 <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center mb-32">
-<div class="space-y-8">
+<div class="space-y-8 reveal-on-scroll">
 <div class="flex items-center gap-6">
 <div class="h-px w-12 bg-primary"></div>
 <span class="font-label-caps text-label-caps text-primary tracking-[0.4em] uppercase">About Our Craft</span>
@@ -286,49 +325,45 @@
 <p>We are proud to have worked with leading brands and organizations including Multilac, Macktiles, Prime Lands, Institute of Information Technology, Dankotuwa, Spar Supermarkets, Lions Club International events, Sunshine Holdings Pvt Ltd, and Mega Lifesciences Pvt Ltd.</p>
 </div>
 </div>
-<div class="grid grid-cols-2 gap-6 relative">
-<div class="space-y-6">
-<div class="rounded-2xl overflow-hidden gold-border-glow">
-<img alt="Cultural Performance" class="w-full h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl-nWX_TKNxQuKrHIOtI3IBkhPwagkLVxZ8E9OFNKmu6cElL7Kbngi51RbK4p7IEO9K61RKm-bgeqssEEaWjCOlw5t3P4FWdLlrO8UDugR36ZkjRcl73i5LPFPogzsak-qizG4i91HPRynDYW91eJbr3XXC3_MqtFuhSlOLcQzIaS-Ih2ndSk3UKeOFnLmmVEfKm6fBnX7lnn89L1ImK6_IwDzTs0KEgyYlYNwAJUho_lnqEHeKemmlJS_xb1cz7UQ0z7eNQ_tLJo">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 relative">
+<div class="rounded-2xl overflow-hidden gold-border-glow transform transition-all duration-700 hover:scale-105 reveal-on-scroll delay-100">
+<img alt="Elegant Event Setup" class="w-full h-96 object-cover grayscale hover:grayscale-0 transition-all duration-700" src="astraledge/WhatsApp Image 2026-05-17 at 20.34.26.jpeg">
 </div>
-<div class="rounded-2xl overflow-hidden gold-border-glow">
-<img alt="Prime Group Showcase" class="w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2LiGj34SvTaK2VcJtN4yQWm5N4hpEyedOKB1RMYOBRA4MhglEaty3wvjF1BOBBUTSGHyV2gCrUwAWwbq3hdU7gdrqlNCfBYBrNYgAeYEBWHi9x0NwH6qJbtzxJ4cwgElCxtFD8B9zrtOctsPnbiM2mEoT7J0yHuWG7rfrhRbIevdJhlbsASIWZKcM1N82wePAj78l3EzHE4dbPUf2Q-WTyeDeRZLbB7AUKwxLPoxp5FbEEQuabUeEBxWQ8hhoKhjgoMnCWHgX2TE">
+<div class="rounded-2xl overflow-hidden gold-border-glow transform transition-all duration-700 hover:scale-105 reveal-on-scroll delay-200">
+<img alt="Luxury Stage Design" class="w-full h-96 object-cover grayscale hover:grayscale-0 transition-all duration-700" src="astraledge/WhatsApp Image 2026-05-17 at 20.41.54.jpeg">
 </div>
-</div>
-<div class="pt-12">
-<div class="rounded-2xl overflow-hidden gold-border-glow h-full">
-<img alt="Live Band Performance" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHlZg2HZ-rlo_XhqvZWE_y2BpyOC8ynJ3SqVZTYzFmVQu3Mbs1sbpkrtOM7zS5HyMB_bhWKZegQO38dNtt44SDStGs9IHI6VTcKf2aLw0EbpEJ_vyxwdtPvh4IhZ8JRrrRdeJKxSASIviuHfxlftb2ZnxVFdXZNj45iobdJK-aiS6jppa5HzkQ0A1EghKX3_BFB5qi4nt3j6d-xgBNpgHBya1dVcXueN-knmxqT9_VdJsLArpUEov-KMbFkKJCUUdO_XBCuR2YL-s">
-</div>
+<div class="rounded-2xl overflow-hidden gold-border-glow transform transition-all duration-700 hover:scale-105 reveal-on-scroll delay-300">
+<img alt="Premium Event Decoration" class="w-full h-96 object-cover grayscale hover:grayscale-0 transition-all duration-700" src="astraledge/WhatsApp Image 2026-05-17 at 20.33.31.jpeg">
 </div>
 </div>
 </div>
 <div class="pt-24 border-t border-outline-variant/10">
-<div class="text-center mb-16">
+<div class="text-center mb-16 reveal-on-scroll">
 <h3 class="font-headline-md text-primary uppercase tracking-[0.2em] text-xl">Categories we work on</h3>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-<div class="p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-colors rounded-xl flex flex-col items-center text-center">
-<span class="material-symbols-outlined text-primary text-4xl mb-4">business_center</span>
+<div class="category-card p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-all duration-500 rounded-xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 reveal-on-scroll delay-100">
+<span class="material-symbols-outlined text-primary text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">business_center</span>
 <h4 class="font-title-lg text-white mb-2">Corporate Functions</h4>
 </div>
-<div class="p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-colors rounded-xl flex flex-col items-center text-center">
-<span class="material-symbols-outlined text-primary text-4xl mb-4">rocket_launch</span>
+<div class="category-card p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-all duration-500 rounded-xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 reveal-on-scroll delay-200">
+<span class="material-symbols-outlined text-primary text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">rocket_launch</span>
 <h4 class="font-title-lg text-white mb-2">Product Launches</h4>
 </div>
-<div class="p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-colors rounded-xl flex flex-col items-center text-center">
-<span class="material-symbols-outlined text-primary text-4xl mb-4">military_tech</span>
+<div class="category-card p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-all duration-500 rounded-xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 reveal-on-scroll delay-300">
+<span class="material-symbols-outlined text-primary text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">military_tech</span>
 <h4 class="font-title-lg text-white mb-2">Awards Ceremonies</h4>
 </div>
-<div class="p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-colors rounded-xl flex flex-col items-center text-center">
-<span class="material-symbols-outlined text-primary text-4xl mb-4">school</span>
+<div class="category-card p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-all duration-500 rounded-xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 reveal-on-scroll delay-100">
+<span class="material-symbols-outlined text-primary text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">school</span>
 <h4 class="font-title-lg text-white mb-2">Graduations</h4>
 </div>
-<div class="p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-colors rounded-xl flex flex-col items-center text-center">
-<span class="material-symbols-outlined text-primary text-4xl mb-4">apartment</span>
+<div class="category-card p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-all duration-500 rounded-xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 reveal-on-scroll delay-200">
+<span class="material-symbols-outlined text-primary text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">apartment</span>
 <h4 class="font-title-lg text-white mb-2">Housing Project Unveilings</h4>
 </div>
-<div class="p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-colors rounded-xl flex flex-col items-center text-center">
-<span class="material-symbols-outlined text-primary text-4xl mb-4">celebration</span>
+<div class="category-card p-10 bg-surface-container border border-outline-variant/10 hover:border-primary/30 transition-all duration-500 rounded-xl flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 reveal-on-scroll delay-300">
+<span class="material-symbols-outlined text-primary text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">celebration</span>
 <h4 class="font-title-lg text-white mb-2">Private Celebrations</h4>
 </div>
 </div>
@@ -558,7 +593,7 @@
 <div class="md:col-span-4 space-y-10">
 <div class="flex items-center gap-6">
 <div class="logo-circle h-16 w-16">
-<img alt="Astral Edge" class="h-full w-full object-contain object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ujcOZ21HODyokLNBkDj2dfRg8sFVAueoFBAnBk51W3vxzENWUr4KKyuuRMg8kAACBmN9PjRMCRBsnRzlAZRompsrR0FnqVNQqBwS0y8ygncH2HGYB956RjPuoZNnhue5XuDi28tgMmCbPHqJdgPSlKW88n09DIAtWD3kCvhLMyqAW_LPE9RV9toIfJ56P202YIzG3DAK7xYb3wtAtxeOA3rn7hlF47iTR3bJzBnDeIlgjVtzLTdGFdgyb3uJBUmcMWLiswsCi6Q">
+<img alt="Astral Edge" class="h-full w-full" src="astraledge/Asset 1.png">
 </div>
 <span class="font-display-lg text-headline-md text-primary tracking-tighter">Astraledge</span>
 </div>
@@ -591,13 +626,13 @@
     // Hero Slider Logic - Cinematic Flow
     const slides = document.querySelectorAll('.fade-slide');
     let currentSlide = 0;
-    
+
     function nextSlide() {
         slides[currentSlide].classList.remove('active');
         currentSlide = (currentSlide + 1) % slides.length;
         slides[currentSlide].classList.add('active');
     }
-    
+
     // Smooth transition every 6 seconds for cinematic feel
     setInterval(nextSlide, 6000);
 
@@ -617,7 +652,7 @@
     const tSlides = document.querySelectorAll('.testimonial-slide');
     const tDots = document.querySelectorAll('#testimonial-dots button');
     let tCurrent = 0;
-    
+
     function showTestimonial(index) {
         tSlides.forEach((s, i) => {
             s.classList.toggle('active', i === index);
@@ -641,5 +676,25 @@
             tInterval = setInterval(nextTestimonial, 5000);
         });
     });
+
+    // Scroll Reveal Animation - Elements appear one by one as you scroll
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+    function checkReveal() {
+        revealElements.forEach((element) => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            const triggerPoint = windowHeight * 0.85;
+
+            if (elementTop < triggerPoint) {
+                element.classList.add('revealed');
+            }
+        });
+    }
+
+    // Check on scroll and on initial load
+    window.addEventListener('scroll', checkReveal);
+    window.addEventListener('load', checkReveal);
+    checkReveal(); // Initial check
 </script>
 </body></html>
